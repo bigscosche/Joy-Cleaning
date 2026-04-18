@@ -52,18 +52,12 @@ function validate() {
   let valid   = true;
   let first   = null;
 
-  const firstName   = document.getElementById('firstName').value.trim();
-  const lastName    = document.getElementById('lastName').value.trim();
+  const name        = document.getElementById('name').value.trim();
   const phone       = document.getElementById('phone').value.trim();
   const serviceType = document.getElementById('serviceType').value;
 
-  if (!firstName) {
-    const f = setError('firstName', 'Please enter your first name.');
-    if (!first) first = f;
-    valid = false;
-  }
-  if (!lastName) {
-    const f = setError('lastName', 'Please enter your last name.');
+  if (!name) {
+    const f = setError('name', 'Please enter your name.');
     if (!first) first = f;
     valid = false;
   }
@@ -73,7 +67,7 @@ function validate() {
     valid = false;
   }
   if (!serviceType) {
-    const f = setError('serviceType', 'Please select a service type.');
+    const f = setError('serviceType', 'Please select a service.');
     if (!first) first = f;
     valid = false;
   }
@@ -98,16 +92,17 @@ form.addEventListener('submit', async (e) => {
   submitBtn.disabled    = true;
   submitBtn.textContent = 'Sending…';
 
+  const homeSize  = document.getElementById('homeSize').value;
+  const rawNotes  = document.getElementById('notes').value.trim();
+  const sizeLabel = { small: 'Small (1–2 bed)', medium: 'Medium (3 bed)', large: 'Large (4+ bed)' }[homeSize];
+  const notes     = [sizeLabel && `Home size: ${sizeLabel}`, rawNotes].filter(Boolean).join(' — ') || null;
+
   const payload = {
-    name:         `${document.getElementById('firstName').value.trim()} ${document.getElementById('lastName').value.trim()}`,
+    name:         document.getElementById('name').value.trim(),
     phone:        document.getElementById('phone').value.trim(),
     email:        document.getElementById('email').value.trim()    || null,
-    address:      document.getElementById('address').value.trim()  || null,
     service_type: document.getElementById('serviceType').value,
-    frequency:    document.getElementById('frequency').value       || null,
-    bedrooms:     document.getElementById('bedrooms').value        || null,
-    bathrooms:    document.getElementById('bathrooms').value       || null,
-    notes:        document.getElementById('notes').value.trim()    || null,
+    notes:        notes,
     status:       'new',
   };
 
