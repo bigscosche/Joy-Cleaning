@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Joy Cleaning — Admin Dashboard</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0F1117;
+      --surface:  #1A1D27;
+      --border:   #2A2D3E;
+      --muted:    #6B7280;
+      --text:     #E5E7EB;
+      --text-dim: #9CA3AF;
+      --accent:   #7B62DF;
+      --green:    #22C55E;
+      --yellow:   #F59E0B;
+      --red:      #EF4444;
+      --blue:     #3B82F6;
+      --font:     -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --radius:   10px;
+      --nav-w:    220px;
+    }
+
+    html, body { height: 100%; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: var(--nav-w);
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+    }
+
+    .sidebar__brand {
+      padding: 20px 20px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar__brand-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .sidebar__brand-name span { color: var(--accent); }
+    .sidebar__brand-sub {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .sidebar__nav { padding: 12px 8px; flex: 1; }
+    .sidebar__section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 8px 12px 4px;
+    }
+    .sidebar__link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 8px;
+      color: var(--text-dim);
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .15s;
+      text-decoration: none;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+    }
+    .sidebar__link:hover { background: rgba(255,255,255,0.05); color: var(--text); }
+    .sidebar__link.active { background: rgba(123,98,223,0.15); color: var(--accent); }
+    .sidebar__link .icon { width: 18px; text-align: center; font-size: 15px; }
+
+    .sidebar__footer {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+    }
+    .sidebar__user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sidebar__avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+    .sidebar__user-name { font-size: 13px; font-weight: 600; }
+    .sidebar__user-role { font-size: 11px; color: var(--muted); }
+
+    /* ── Main ── */
+    .main {
+      flex: 1;
+      overflow-y: auto;
+      height: 100vh;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 28px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 10;
+    }
+    .topbar__title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .topbar__meta {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .topbar__actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-sm {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 7px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-dim);
+      transition: all .15s;
+    }
+    .btn-sm:hover { background: rgba(255,255,255,0.06); color: var(--text); }
+    .btn-sm.primary { background: var(--accent); border-color: var(--accent); color: white; }
+    .btn-sm.primary:hover { opacity: 0.88; }
+
+    .content { padding: 28px; }
+
+    /* ── Section Header ── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .section-header h2 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .section-header .see-all {
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    /* ── Summary Cards ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+    .stat-card__label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .stat-card__value {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-card__delta {
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .stat-card__delta.up { color: var(--green); }
+    .stat-card__delta.down { color: var(--red); }
+    .stat-card__delta.neutral { color: var(--muted); }
+    .stat-card__sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    /* ── Revenue Bar ── */
+    .revenue-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .chart-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+    .chart-card__title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .chart-card__sub {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .bar-chart { display: flex; align-items: flex-end; gap: 6px; height: 100px; }
+    .bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end; }
+    .bar {
+      width: 100%;
+      border-radius: 4px 4px 0 0;
+      background: var(--accent);
+      transition: height .3s;
+      min-height: 4px;
+      opacity: 0.8;
+    }
+    .bar.current { opacity: 1; }
+    .bar-label { font-size: 9px; color: var(--muted); font-weight: 600; letter-spacing: 0.04em; }
+
+    .expense-rows { display: flex; flex-direction: column; gap: 12px; }
+    .expense-row { display: flex; align-items: center; gap: 12px; }
+    .expense-row__bar-bg { flex: 1; height: 6px; background: var(--border); border-radius: 3px; }
+    .expense-row__bar-fill { height: 100%; border-radius: 3px; }
+    .expense-row__label { font-size: 12px; color: var(--text-dim); width: 90px; flex-shrink: 0; }
+    .expense-row__value { font-size: 12px; font-weight: 700; color: var(--text); width: 56px; text-align: right; flex-shrink: 0; }
+
+    /* ── Tables ── */
+    .table-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+    .table-card__header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .table-card__title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .table-card__count {
+      background: rgba(123,98,223,0.18);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th {
+      text-align: left;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 10px 20px;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    td {
+      padding: 12px 20px;
+      font-size: 13px;
+      color: var(--text-dim);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+
+    .td-name { color: var(--text); font-weight: 600; }
+    .td-mono { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12px; }
+
+    /* ── Badges ── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 9px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; }
+    .badge.green { background: rgba(34,197,94,0.12); color: #4ade80; }
+    .badge.green::before { background: #4ade80; }
+    .badge.yellow { background: rgba(245,158,11,0.12); color: #fbbf24; }
+    .badge.yellow::before { background: #fbbf24; }
+    .badge.blue { background: rgba(59,130,246,0.12); color: #60a5fa; }
+    .badge.blue::before { background: #60a5fa; }
+    .badge.red { background: rgba(239,68,68,0.12); color: #f87171; }
+    .badge.red::before { background: #f87171; }
+    .badge.purple { background: rgba(123,98,223,0.15); color: #a78bfa; }
+    .badge.purple::before { background: #a78bfa; }
+    .badge.gray { background: rgba(107,114,128,0.15); color: var(--muted); }
+    .badge.gray::before { background: var(--muted); }
+
+    /* ── Gas Tracker ── */
+    .gas-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .gas-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+    .gas-card__label { font-size: 10px; color: var(--muted); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+    .gas-card__value { font-size: 20px; font-weight: 800; color: var(--text); }
+    .gas-card__unit { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    /* ── Tabs ── */
+    .tabs { display: flex; gap: 4px; margin-bottom: 20px; }
+    .tab {
+      padding: 7px 14px;
+      border-radius: 7px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--muted);
+      background: none;
+      border: none;
+      transition: all .15s;
+    }
+    .tab:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+    .tab.active { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+
+    /* ── Responsive hide ── */
+    @media (max-width: 1100px) {
+      .cards-grid { grid-template-columns: repeat(2, 1fr); }
+      .revenue-row { grid-template-columns: 1fr; }
+      .gas-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ── View panels ── */
+    .view { display: none; }
+    .view.active { display: block; }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar__brand">
+      <div class="sidebar__brand-name">Joy<span>Cleaning</span></div>
+      <div class="sidebar__brand-sub">Internal Dashboard</div>
+    </div>
+
+    <nav class="sidebar__nav">
+      <div class="sidebar__section-label">Overview</div>
+      <button class="sidebar__link active" onclick="switchView('overview', this)">
+        <span class="icon">📊</span> Dashboard
+      </button>
+
+      <div class="sidebar__section-label" style="margin-top:12px;">Operations</div>
+      <button class="sidebar__link" onclick="switchView('leads', this)">
+        <span class="icon">📋</span> Leads
+      </button>
+      <button class="sidebar__link" onclick="switchView('jobs', this)">
+        <span class="icon">🧹</span> Jobs
+      </button>
+      <button class="sidebar__link" onclick="switchView('clients', this)">
+        <span class="icon">👥</span> Clients
+      </button>
+      <button class="sidebar__link" onclick="switchView('workers', this)">
+        <span class="icon">👷</span> Workers
+      </button>
+
+      <div class="sidebar__section-label" style="margin-top:12px;">Finances</div>
+      <button class="sidebar__link" onclick="switchView('revenue', this)">
+        <span class="icon">💰</span> Revenue
+      </button>
+      <button class="sidebar__link" onclick="switchView('expenses', this)">
+        <span class="icon">🧾</span> Expenses
+      </button>
+      <button class="sidebar__link" onclick="switchView('gas', this)">
+        <span class="icon">⛽</span> Gas Tracker
+      </button>
+    </nav>
+
+    <div class="sidebar__footer">
+      <div class="sidebar__user">
+        <div class="sidebar__avatar">MC</div>
+        <div>
+          <div class="sidebar__user-name">Maria & Carlos</div>
+          <div class="sidebar__user-role">Admin · Joy Cleaning</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar__title" id="topbar-title">Dashboard</div>
+      <div class="topbar__meta" id="topbar-meta">April 2025 · Week 16</div>
+      <div class="topbar__actions">
+        <button class="btn-sm">⬇ Export</button>
+        <button class="btn-sm primary">+ Add Entry</button>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- ── OVERVIEW ── -->
+      <div class="view active" id="view-overview">
+
+        <div class="cards-grid">
+          <div class="stat-card">
+            <div class="stat-card__label">Today's Revenue</div>
+            <div class="stat-card__value" data-stat="today-revenue">$420</div>
+            <div class="stat-card__delta up">↑ 12% vs last Fri</div>
+            <div class="stat-card__sub" data-stat="today-jobs">3 jobs completed</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__label">This Week</div>
+            <div class="stat-card__value">$1,840</div>
+            <div class="stat-card__delta up">↑ 8% vs last week</div>
+            <div class="stat-card__sub">11 jobs · 4 days in</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__label">This Month</div>
+            <div class="stat-card__value" data-stat="month-revenue">$6,290</div>
+            <div class="stat-card__delta up">↑ 21% vs March</div>
+            <div class="stat-card__sub" data-stat="month-jobs">41 jobs completed</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__label">New Leads</div>
+            <div class="stat-card__value" data-stat="new-leads">7</div>
+            <div class="stat-card__delta neutral">→ Same as last week</div>
+            <div class="stat-card__sub" data-stat="pending-leads">3 awaiting response</div>
+          </div>
+        </div>
+
+        <div class="revenue-row">
+          <div class="chart-card">
+            <div class="chart-card__title">Monthly Revenue</div>
+            <div class="chart-card__sub">Last 7 months</div>
+            <div class="bar-chart">
+              <div class="bar-wrap">
+                <div class="bar" style="height:52%"></div>
+                <div class="bar-label">Oct</div>
+              </div>
+              <div class="bar-wrap">
+                <div class="bar" style="height:45%"></div>
+                <div class="bar-label">Nov</div>
+              </div>
+              <div class="bar-wrap">
+                <div class="bar" style="height:38%"></div>
+                <div class="bar-label">Dec</div>
+              </div>
+              <div class="bar-wrap">
+                <div class="bar" style="height:62%"></div>
+                <div class="bar-label">Jan</div>
+              </div>
+              <div class="bar-wrap">
+                <div class="bar" style="height:71%"></div>
+                <div class="bar-label">Feb</div>
+              </div>
+              <div class="bar-wrap">
+                <div class="bar" style="height:78%"></div>
+                <div class="bar-label">Mar</div>
+              </div>
+              <div class="bar-wrap">
+                <div class="bar current" style="height:95%"></div>
+                <div class="bar-label">Apr</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <div class="chart-card__title">Expense Breakdown</div>
+            <div class="chart-card__sub">April 2025</div>
+            <div class="expense-rows">
+              <div class="expense-row">
+                <div class="expense-row__label">Supplies</div>
+                <div class="expense-row__bar-bg"><div class="expense-row__bar-fill" style="width:68%;background:#7B62DF;"></div></div>
+                <div class="expense-row__value">$340</div>
+              </div>
+              <div class="expense-row">
+                <div class="expense-row__label">Gas</div>
+                <div class="expense-row__bar-bg"><div class="expense-row__bar-fill" style="width:42%;background:#3B82F6;"></div></div>
+                <div class="expense-row__value">$210</div>
+              </div>
+              <div class="expense-row">
+                <div class="expense-row__label">Insurance</div>
+                <div class="expense-row__bar-bg"><div class="expense-row__bar-fill" style="width:30%;background:#F59E0B;"></div></div>
+                <div class="expense-row__value">$150</div>
+              </div>
+              <div class="expense-row">
+                <div class="expense-row__label">Marketing</div>
+                <div class="expense-row__bar-bg"><div class="expense-row__bar-fill" style="width:20%;background:#22C55E;"></div></div>
+                <div class="expense-row__value">$100</div>
+              </div>
+              <div class="expense-row">
+                <div class="expense-row__label">Other</div>
+                <div class="expense-row__bar-bg"><div class="expense-row__bar-fill" style="width:10%;background:#6B7280;"></div></div>
+                <div class="expense-row__value">$50</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Jobs -->
+        <div class="section-header">
+          <h2>Recent Jobs</h2>
+          <a class="see-all" onclick="switchView('jobs', document.querySelector('[onclick*=jobs]'))">See all →</a>
+        </div>
+        <div class="table-card">
+          <table>
+            <thead>
+              <tr>
+                <th>Client</th>
+                <th>Service</th>
+                <th>Town</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody data-render="overview-jobs">
+              <tr>
+                <td class="td-name">Karen L.</td>
+                <td>Recurring (Bi-weekly)</td>
+                <td>Ridgefield</td>
+                <td>Apr 18, 2025</td>
+                <td class="td-mono">$175</td>
+                <td><span class="badge green">Completed</span></td>
+              </tr>
+              <tr>
+                <td class="td-name">Tom R.</td>
+                <td>Deep Clean</td>
+                <td>Bethel</td>
+                <td>Apr 18, 2025</td>
+                <td class="td-mono">$320</td>
+                <td><span class="badge green">Completed</span></td>
+              </tr>
+              <tr>
+                <td class="td-name">Sarah P.</td>
+                <td>Recurring (Bi-weekly)</td>
+                <td>Newtown</td>
+                <td>Apr 17, 2025</td>
+                <td class="td-mono">$185</td>
+                <td><span class="badge green">Completed</span></td>
+              </tr>
+              <tr>
+                <td class="td-name">James F.</td>
+                <td>Move-Out Clean</td>
+                <td>Danbury</td>
+                <td>Apr 17, 2025</td>
+                <td class="td-mono">$385</td>
+                <td><span class="badge green">Completed</span></td>
+              </tr>
+              <tr>
+                <td class="td-name">Maria G.</td>
+                <td>Standard Clean</td>
+                <td>Brookfield</td>
+                <td>Apr 19, 2025</td>
+                <td class="td-mono">$155</td>
+                <td><span class="badge yellow">Scheduled</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Recent Leads -->
+        <div class="section-header">
+          <h2>Recent Leads</h2>
+          <a class="see-all" onclick="switchView('leads', document.querySelector('[onclick*=leads]'))">See all →</a>
+        </div>
+        <div class="table-card">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Town</th>
+                <th>Service</th>
+                <th>Received</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody data-render="overview-leads">
+              <tr>
+                <td class="td-name">Robert H.</td>
+                <td>Wilton</td>
+                <td>Deep Clean</td>
+                <td>Apr 18, 2025</td>
+                <td><span class="badge yellow">New</span></td>
+              </tr>
+              <tr>
+                <td class="td-name">Lisa M.</td>
+                <td>New Fairfield</td>
+                <td>Recurring</td>
+                <td>Apr 17, 2025</td>
+                <td><span class="badge blue">Quoted</span></td>
+              </tr>
+              <tr>
+                <td class="td-name">Dan K.</td>
+                <td>Danbury</td>
+                <td>Move-In Clean</td>
+                <td>Apr 16, 2025</td>
+                <td><span class="badge purple">Booked</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── LEADS ── -->
+      <div class="view" id="view-leads">
+        <div class="cards-grid" style="grid-template-columns:repeat(3,1fr);">
+          <div class="stat-card">
+            <div class="stat-card__label">Total Leads (Apr)</div>
+            <div class="stat-card__value" data-stat="leads-total">18</div>
+            <div class="stat-card__delta up">↑ 4 vs March</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__label">Converted</div>
+            <div class="stat-card__value" data-stat="leads-converted">11</div>
+            <div class="stat-card__delta up">61% conversion</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__label">Pending Response</div>
+            <div class="stat-card__value" data-stat="leads-pending">3</div>
+            <div class="stat-card__delta neutral">Avg response: 2.4 hrs</div>
+          </div>
+        </div>
+
+        <div class="section-header"><h2>All Leads — April 2025</h2></div>
+        <div class="table-card">
+          <div class="table-card__header">
+            <span class="table-card__title">Leads</span>
+            <span class="table-card__count">18 total</span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Phone / Email</th>
+                <th>Town</th>
+                <th>Service Interest</th>
+                <th>Home Size</th>
+                <th>Received</th>
+                <th>Status</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody data-render="leads">
+              <tr>
+                <td class="td-mono">001</td>
+                <td class="td-name">Robert H.</td>
+                <td class="td-mono">robert.h@email.com</td>
+                <td>Wilton</td>
+                <td>Deep Clean</td>
+                <td>4 BR / 3 BA</td>
+                <td>Apr 18</td>
+                <td><span class="badge yellow">New</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td class="td-mono">002</td>
+                <td class="td-name">Lisa M.</td>
+                <td class="td-mono">(203) 555-0219</td>
+                <td>New Fairfield</td>
+                <td>Recurring (Bi-weekly)</td>
+                <td>3 BR / 2 BA</td>
+                <td>Apr 17</td>
+                <td><span class="badge blue">Quoted</span></td>
+                <td>Lakefront, dogs</td>
+              </tr>
+              <tr>
+                <td class="td-mono">003</td>
+                <td class="td-name">Dan K.</td>
+                <td class="td-mono">dan.k@email.com</td>
+                <td>Danbury</td>
+                <td>Move-In Clean</td>
+                <td>2 BR / 1 BA</td>
+                <td>Apr 16</td>
+                <td><span class="badge purple">Booked</span></td>
+                <td>Apr 22 confirmed</td>
+              </tr>
+              <tr>
+                <td class="td-mono">004</td>
+                <td class="td-name">Anne T.</td>
+                <td class="td-mono">(203) 555-0341</td>
+                <td>Ridgefield</td>
+                <td>Recurring (Weekly)</td>
+                <td>5 BR / 4 BA</td>
+                <td>Apr 15</td>
+                <td><span class="badge green">Active Client</span></td>
+                <td>Large estate</td>
+              </tr>
+              <tr>
+                <td class="td-mono">005</td>
+                <td class="td-name">Mike S.</td>
+                <td class="td-mono">mike.s@email.com</td>
+                <td>Brookfield</td>
+                <td>Deep Clean</td>
+                <td>3 BR / 2 BA</td>
+                <td>Apr 14</td>
+                <td><span class="badge yellow">New</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td class="td-mono">006</td>
+                <td class="td-name">Jennifer W.</td>
+                <td class="td-mono">(203) 555-0487</td>
+                <td>Newtown</td>
+                <td>Recurring (Bi-weekly)</td>
+                <td>4 BR / 2 BA</td>
+                <td>Apr 12</td>
+                <td><span class="badge green">Active Client</span></td>
+                <td>2 kids, 1 dog</td>
+              </tr>
+              <tr>
+                <td class="td-mono">007</td>
+                <td class="td-name">Paul D.</td>
+                <td class="td-mono">paul.d@email.com</td>
+                <td>Bethel</td>
+                <td>Standard</td>
+                <td>2 BR / 1 BA</td>
+                <td>Apr 10</td>
+                <td><span class="badge red">No Response</span></td>
+                <td>Attempted twice</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── JOBS ── -->
+      <div class="view" id="view-jobs">
+        <div class="cards-grid">
+          <div class="stat-card">
+            <div class="stat-card__label">Jobs This Week</div>
+            <div class="stat-card__value" data-stat="jobs-week">11</div>
+            <div class="stat-card__delta up">↑ 2 vs last week</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__label">Jobs This Month</div>
+            <div class="stat-card__value" data-stat="jobs-month">41</div>
+            <div class="stat-card__delta up">↑ 7 vs March</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__label">Avg Job Value</div>
+            <div class="stat-card__value" data-stat="jobs-avg">$211</div>
+            <div class="stat-card__delta up">↑ $18 vs last month</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__label">Upcoming (7 days)</div>
+            <div class="stat-card__value" data-stat="jobs-upcoming">8</div>
+            <div class="stat-card__delta neutral">2 deep cleans</div>
+          </div>
+        </div>
+
+        <div class="section-header"><h2>Job Log — April 2025</h2></div>
+        <div class="table-card">
+          <div class="table-card__header">
+            <span class="table-card__title">All Jobs</span>
+            <span class="table-card__count">41 this month</span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Job #</th>
+                <th>Client</th>
+                <th>Service Type</th>
+                <th>Town</th>
+                <th>Date</th>
+                <th>Duration</th>
+                <th>Cleaner(s)</th>
+                <th>Amount</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody data-render="jobs">
+              <tr>
+                <td class="td-mono">#0441</td>
+                <td class="td-name">Karen L.</td>
+                <td>Recurring – Bi-weekly</td>
+                <td>Ridgefield</td>
+                <td>Apr 18</td>
+                <td>2h 15m</td>
+                <td>Maria, Ana</td>
+                <td class="td-mono">$175</td>
+                <td><span class="badge green">Completed</span></td>
+              </tr>
+              <tr>
+                <td class="td-mono">#0440</td>
+                <td class="td-name">Tom R.</td>
+                <td>Deep Clean</td>
+                <td>Bethel</td>
+                <td>Apr 18</td>
+                <td>4h 00m</td>
+                <td>Carlos, Ana</td>
+                <td class="td-mono">$320</td>
+                <td><span class="badge green">Completed</span></td>
+              </tr>
+              <tr>
+                <td class="td-mono">#0439</td>
+                <td class="td-name">Sarah P.</td>
+                <td>Recurring – Bi-weekly</td>
+                <td>Newtown</td>
+                <td>Apr 17</td>
+                <td>2h 30m</td>
+                <td>Maria, Ana</td>
+                <td class="td-mono">$185</td>
+                <td><span class="badge green">Completed</span></td>
+              </tr>
+              <tr>
+                <td class="td-mono">#0438</td>
+                <td class="td-name">James F.</td>
+                <td>Move-Out Clean</td>
+                <td>Danbury</td>
+                <td>Apr 17</td>
+                <td>5h 00m</td>
+                <td>Carlos, Maria</td>
+                <td class="td-mono">$385</td>
+                <td><span class="badge green">Completed</span></td>
+              </tr>
+              <tr>
+                <td class="td-mono">#0437</td>
+                <td class="td-name">Anne M.</td>
+                <td>Recurring – Monthly Deep</td>
+                <td>Redding</td>
+                <td>Apr 16</td>
+                <td>5h 30m</td>
+                <td>Carlos, Ana, Maria</td>
+                <td class="td-mono">$480</td>
+                <td><span class="badge green">Completed</span></td>
+              </tr>
+              <tr>
+                <td class="td-mono">#0442</td>
+                <td class="td-name">Maria G.</td>
+                <td>Standard Clean</td>
+                <td>Brookfield</td>
+                <td>Apr 19</td>
+                <td>—</td>
+                <td>Maria</td>
+                <td class="td-mono">$155</td>
+                <td><span class="badge yellow">Scheduled</span></td>
+              </tr>
+              <tr>
+                <td class="td-mono">#0443</td>
+                <td class="td-name">Robert H.</td>
+                <td>Deep Clean</td>
+                <td>Wilton</td>
+                <td>Apr 22</td>
+                <td>—</td>
+                <td>TBD</td>
+                <td class="td-mono">$375</td>
+                <td><span class="badge blue">Pending Confirm</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── CLIENTS ── -->
+      <div class="view" id="view-clients">
+        <div class="cards-grid">
+          <div class="stat-card">
+            <div class="stat-card__label">Active Clients</div>
+            <div class="stat-card__value" data-stat="clients-active">—</div>
+            <div class="stat-card__delta neutral">On the rotation</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__label">Total Clients</div>
+            <div class="stat-card__value" data-stat="clients-total">—</div>
+            <div class="stat-card__delta neutral">Including past clients</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__label">Recurring Clients</div>
+            <div class="stat-card__value" data-stat="clients-recurring">—</div>
+            <div class="stat-card__delta neutral">Weekly, bi-weekly, monthly</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__label">Avg Lifetime Value</div>
+            <div class="stat-card__value" data-stat="clients-ltv-avg">—</div>
+            <div class="stat-card__delta neutral">Per client, all time</div>
+          </div>
+        </div>
+
+        <div class="section-header"><h2>Client Directory</h2></div>
+        <div class="table-card">
+          <div class="table-card__header">
+            <span class="table-card__title">All Clients</span>
+            <span class="table-card__count">Directory</span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Town</th>
+                <th>Frequency</th>
+                <th>Jobs</th>
+                <th>Lifetime Value</th>
+                <th>Status</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody data-render="clients"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── WORKERS ── -->
+      <div class="view" id="view-workers">
+        <div class="cards-grid" style="grid-template-columns:repeat(3,1fr);">
+          <div class="stat-card">
+            <div class="stat-card__label">Active Team</div>
+            <div class="stat-card__value" data-stat="workers-active">—</div>
+            <div class="stat-card__delta neutral">On the schedule</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__label">Hours Worked (Month)</div>
+            <div class="stat-card__value" data-stat="workers-hours-month">—</div>
+            <div class="stat-card__delta neutral">Completed jobs only</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__label">Payroll (Month)</div>
+            <div class="stat-card__value" data-stat="workers-pay-month">—</div>
+            <div class="stat-card__delta neutral">Before taxes</div>
+          </div>
+        </div>
+
+        <div class="section-header"><h2>Team Performance — April 2025</h2></div>
+        <div class="table-card">
+          <div class="table-card__header">
+            <span class="table-card__title">Team</span>
+            <span class="table-card__count">Month-to-date</span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Phone</th>
+                <th>Rate</th>
+                <th>Jobs</th>
+                <th>Hours</th>
+                <th>Pay</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody data-render="workers"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── REVENUE ── -->
+      <div class="view" id="view-revenue">
+        <div class="cards-grid">
+          <div class="stat-card">
+            <div class="stat-card__label">April Revenue</div>
+            <div class="stat-card__value" data-stat="rev-month">$6,290</div>
+            <div class="stat-card__delta up">↑ 21% vs March</div>
+            <div class="stat-card__sub">41 jobs</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__label">March Revenue</div>
+            <div class="stat-card__value">$5,200</div>
+            <div class="stat-card__delta up">↑ 14% vs Feb</div>
+            <div class="stat-card__sub">34 jobs</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__label">Q1 2025 Total</div>
+            <div class="stat-card__value">$14,800</div>
+            <div class="stat-card__delta up">↑ 18% vs Q1 2024</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__label">YTD 2025</div>
+            <div class="stat-card__value">$21,090</div>
+            <div class="stat-card__delta up">On track for best year</div>
+          </div>
+        </div>
+
+        <div class="section-header"><h2>Revenue by Service Type — April 2025</h2></div>
+        <div class="table-card">
+          <table>
+            <thead>
+              <tr>
+                <th>Service</th>
+                <th>Jobs</th>
+                <th>Avg Value</th>
+                <th>Total Revenue</th>
+                <th>% of Month</th>
+              </tr>
+            </thead>
+            <tbody data-render="revenue">
+              <tr>
+                <td class="td-name">Recurring (Bi-weekly)</td>
+                <td>18</td>
+                <td class="td-mono">$168</td>
+                <td class="td-mono">$3,024</td>
+                <td><span class="badge purple">48%</span></td>
+              </tr>
+              <tr>
+                <td class="td-name">Deep Cleaning</td>
+                <td>9</td>
+                <td class="td-mono">$338</td>
+                <td class="td-mono">$3,042</td>
+                <td><span class="badge blue">48%</span></td>
+              </tr>
+              <tr>
+                <td class="td-name">Move In / Move Out</td>
+                <td>4</td>
+                <td class="td-mono">$395</td>
+                <td class="td-mono">$1,580</td>
+                <td><span class="badge yellow">25%</span></td>
+              </tr>
+              <tr>
+                <td class="td-name">Recurring (Monthly)</td>
+                <td>7</td>
+                <td class="td-mono">$220</td>
+                <td class="td-mono">$1,540</td>
+                <td><span class="badge green">24%</span></td>
+              </tr>
+              <tr>
+                <td class="td-name">One-Time Standard</td>
+                <td>3</td>
+                <td class="td-mono">$168</td>
+                <td class="td-mono">$504</td>
+                <td><span class="badge gray">8%</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── EXPENSES ── -->
+      <div class="view" id="view-expenses">
+        <div class="cards-grid" style="grid-template-columns:repeat(3,1fr);">
+          <div class="stat-card">
+            <div class="stat-card__label">Total Expenses (Apr)</div>
+            <div class="stat-card__value" data-stat="exp-month">$850</div>
+            <div class="stat-card__delta up">↑ $40 vs March</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__label">Net Profit (Apr)</div>
+            <div class="stat-card__value" data-stat="net-profit">$5,440</div>
+            <div class="stat-card__delta up">86.5% margin</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__label">Expense Ratio</div>
+            <div class="stat-card__value" data-stat="exp-ratio">13.5%</div>
+            <div class="stat-card__delta neutral">Target: &lt; 15%</div>
+          </div>
+        </div>
+
+        <div class="section-header"><h2>Expense Log — April 2025</h2></div>
+        <div class="table-card">
+          <div class="table-card__header">
+            <span class="table-card__title">All Expenses</span>
+            <span class="table-card__count">$850 total</span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Payment</th>
+                <th>Receipt</th>
+              </tr>
+            </thead>
+            <tbody data-render="expenses">
+              <tr>
+                <td>Apr 15</td>
+                <td><span class="badge purple">Supplies</span></td>
+                <td>Cleaning products restock — Costco</td>
+                <td class="td-mono">$198</td>
+                <td>Business card</td>
+                <td><span class="badge green">Saved</span></td>
+              </tr>
+              <tr>
+                <td>Apr 12</td>
+                <td><span class="badge blue">Gas</span></td>
+                <td>Maria vehicle — weekly fill</td>
+                <td class="td-mono">$62</td>
+                <td>Business card</td>
+                <td><span class="badge green">Saved</span></td>
+              </tr>
+              <tr>
+                <td>Apr 12</td>
+                <td><span class="badge blue">Gas</span></td>
+                <td>Carlos vehicle — weekly fill</td>
+                <td class="td-mono">$58</td>
+                <td>Business card</td>
+                <td><span class="badge green">Saved</span></td>
+              </tr>
+              <tr>
+                <td>Apr 10</td>
+                <td><span class="badge yellow">Insurance</span></td>
+                <td>Monthly liability premium</td>
+                <td class="td-mono">$150</td>
+                <td>Auto-pay</td>
+                <td><span class="badge green">Saved</span></td>
+              </tr>
+              <tr>
+                <td>Apr 8</td>
+                <td><span class="badge purple">Supplies</span></td>
+                <td>Microfiber cloths, mop heads</td>
+                <td class="td-mono">$87</td>
+                <td>Amazon</td>
+                <td><span class="badge green">Saved</span></td>
+              </tr>
+              <tr>
+                <td>Apr 5</td>
+                <td><span class="badge green">Marketing</span></td>
+                <td>Google Business profile boost</td>
+                <td class="td-mono">$100</td>
+                <td>Business card</td>
+                <td><span class="badge green">Saved</span></td>
+              </tr>
+              <tr>
+                <td>Apr 3</td>
+                <td><span class="badge blue">Gas</span></td>
+                <td>Maria vehicle — weekly fill</td>
+                <td class="td-mono">$55</td>
+                <td>Business card</td>
+                <td><span class="badge yellow">Pending</span></td>
+              </tr>
+              <tr>
+                <td>Apr 2</td>
+                <td><span class="badge purple">Supplies</span></td>
+                <td>Eco cleaning solution — bulk order</td>
+                <td class="td-mono">$140</td>
+                <td>Business card</td>
+                <td><span class="badge green">Saved</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── GAS TRACKER ── -->
+      <div class="view" id="view-gas">
+        <div class="cards-grid">
+          <div class="stat-card">
+            <div class="stat-card__label">Gas Spend (Apr)</div>
+            <div class="stat-card__value" data-stat="gas-month">$210</div>
+            <div class="stat-card__delta neutral">→ Same as March</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__label">Total Miles (Apr)</div>
+            <div class="stat-card__value" data-stat="gas-miles">1,248</div>
+            <div class="stat-card__delta up">↑ 87 vs March</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__label">$/Mile Average</div>
+            <div class="stat-card__value" data-stat="gas-per-mile">$0.17</div>
+            <div class="stat-card__delta neutral">IRS rate: $0.67</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__label">Tax Deduction (Apr)</div>
+            <div class="stat-card__value" data-stat="gas-deduction">$836</div>
+            <div class="stat-card__delta neutral">At IRS mileage rate</div>
+            <div class="stat-card__sub">Keep receipts + mileage log</div>
+          </div>
+        </div>
+
+        <div class="section-header"><h2>Vehicle Breakdown</h2></div>
+        <div class="gas-grid">
+          <div class="chart-card">
+            <div class="chart-card__title">Maria's Vehicle</div>
+            <div class="chart-card__sub">2019 Honda CR-V · April 2025</div>
+            <div class="gas-grid" style="margin-top:16px;margin-bottom:0;">
+              <div class="gas-card">
+                <div class="gas-card__label">Miles</div>
+                <div class="gas-card__value">648</div>
+                <div class="gas-card__unit">this month</div>
+              </div>
+              <div class="gas-card">
+                <div class="gas-card__label">Gas Cost</div>
+                <div class="gas-card__value">$117</div>
+                <div class="gas-card__unit">3 fill-ups</div>
+              </div>
+              <div class="gas-card">
+                <div class="gas-card__label">Deduction</div>
+                <div class="gas-card__value">$434</div>
+                <div class="gas-card__unit">at IRS rate</div>
+              </div>
+            </div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-card__title">Carlos's Vehicle</div>
+            <div class="chart-card__sub">2021 Ford Transit · April 2025</div>
+            <div class="gas-grid" style="margin-top:16px;margin-bottom:0;">
+              <div class="gas-card">
+                <div class="gas-card__label">Miles</div>
+                <div class="gas-card__value">600</div>
+                <div class="gas-card__unit">this month</div>
+              </div>
+              <div class="gas-card">
+                <div class="gas-card__label">Gas Cost</div>
+                <div class="gas-card__value">$93</div>
+                <div class="gas-card__unit">2 fill-ups</div>
+              </div>
+              <div class="gas-card">
+                <div class="gas-card__label">Deduction</div>
+                <div class="gas-card__value">$402</div>
+                <div class="gas-card__unit">at IRS rate</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-header" style="margin-top:28px;"><h2>Gas Fill-Up Log — April 2025</h2></div>
+        <div class="table-card">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Vehicle</th>
+                <th>Driver</th>
+                <th>Station</th>
+                <th>Gallons</th>
+                <th>Price/Gal</th>
+                <th>Total</th>
+                <th>Odometer</th>
+                <th>Receipt</th>
+              </tr>
+            </thead>
+            <tbody data-render="gas">
+              <tr>
+                <td>Apr 15</td>
+                <td>Honda CR-V</td>
+                <td>Maria</td>
+                <td>Shell – Danbury</td>
+                <td class="td-mono">14.2</td>
+                <td class="td-mono">$3.42</td>
+                <td class="td-mono">$48.56</td>
+                <td class="td-mono">48,231</td>
+                <td><span class="badge green">Saved</span></td>
+              </tr>
+              <tr>
+                <td>Apr 12</td>
+                <td>Ford Transit</td>
+                <td>Carlos</td>
+                <td>BP – Newtown Rd</td>
+                <td class="td-mono">16.8</td>
+                <td class="td-mono">$3.44</td>
+                <td class="td-mono">$57.79</td>
+                <td class="td-mono">31,445</td>
+                <td><span class="badge green">Saved</span></td>
+              </tr>
+              <tr>
+                <td>Apr 8</td>
+                <td>Honda CR-V</td>
+                <td>Maria</td>
+                <td>Citgo – Federal Rd</td>
+                <td class="td-mono">13.9</td>
+                <td class="td-mono">$3.38</td>
+                <td class="td-mono">$47.00</td>
+                <td class="td-mono">47,890</td>
+                <td><span class="badge green">Saved</span></td>
+              </tr>
+              <tr>
+                <td>Apr 3</td>
+                <td>Honda CR-V</td>
+                <td>Maria</td>
+                <td>Shell – Danbury</td>
+                <td class="td-mono">6.4</td>
+                <td class="td-mono">$3.40</td>
+                <td class="td-mono">$21.76</td>
+                <td class="td-mono">47,540</td>
+                <td><span class="badge yellow">Pending</span></td>
+              </tr>
+              <tr>
+                <td>Apr 2</td>
+                <td>Ford Transit</td>
+                <td>Carlos</td>
+                <td>Gulf – Brookfield</td>
+                <td class="td-mono">10.1</td>
+                <td class="td-mono">$3.45</td>
+                <td class="td-mono">$34.85</td>
+                <td class="td-mono">31,102</td>
+                <td><span class="badge green">Saved</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/admin-data.js"></script>
+  <script src="js/admin.js"></script>
+  <script>
+    function switchView(viewId, btn) {
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+      document.querySelectorAll('.sidebar__link').forEach(l => l.classList.remove('active'));
+      document.getElementById('view-' + viewId).classList.add('active');
+      if (btn) btn.classList.add('active');
+
+      const titles = {
+        overview: 'Dashboard',
+        leads: 'Leads',
+        jobs: 'Jobs',
+        clients: 'Clients',
+        workers: 'Workers',
+        revenue: 'Revenue',
+        expenses: 'Expenses',
+        gas: 'Gas Tracker'
+      };
+      const metas = {
+        overview: 'April 2025 · Week 16',
+        leads: 'April 2025 · Lead pipeline',
+        jobs: 'April 2025 · Job schedule',
+        clients: 'April 2025 · Client directory',
+        workers: 'April 2025 · Team performance',
+        revenue: 'April 2025 · Revenue breakdown',
+        expenses: 'April 2025 · Expense log',
+        gas: 'April 2025 · Gas + mileage'
+      };
+      document.getElementById('topbar-title').textContent = titles[viewId] || viewId;
+      document.getElementById('topbar-meta').textContent = metas[viewId] || '';
+    }
+  </script>
+
+</body>
+</html>

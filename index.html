@@ -15,9 +15,34 @@
       <a href="index.html" class="nav__logo">Joy<span>Cleaning</span></a>
       <nav aria-label="Main navigation">
         <ul class="nav__links">
-          <li><a href="services.html">Services</a></li>
+          <li class="has-dropdown">
+            <a href="services.html">Services</a>
+            <div class="nav__dropdown">
+              <a href="services.html">All Services</a>
+              <hr>
+              <a href="deep-cleaning.html">Deep Cleaning</a>
+              <a href="recurring-cleaning.html">Recurring Cleaning</a>
+              <a href="move-in-move-out-cleaning.html">Move In / Move Out</a>
+              <a href="apartment-cleaning.html">Apartment Cleaning</a>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="areas/fairfield-county.html">Areas</a>
+            <div class="nav__dropdown">
+              <a href="areas/fairfield-county.html">Fairfield County</a>
+              <hr>
+              <a href="areas/danbury.html">Danbury</a>
+              <a href="areas/ridgefield.html">Ridgefield</a>
+              <a href="areas/newtown.html">Newtown</a>
+              <a href="areas/bethel.html">Bethel</a>
+              <a href="areas/redding.html">Redding</a>
+              <a href="areas/brookfield.html">Brookfield</a>
+              <a href="areas/new-fairfield.html">New Fairfield</a>
+              <a href="areas/wilton.html">Wilton</a>
+            </div>
+          </li>
+          <li><a href="blog/">Blog</a></li>
           <li><a href="about.html">About</a></li>
-          <li><a href="index.html#areas">Service Areas</a></li>
           <li><a href="quote.html" class="nav__cta">Get a Free Quote</a></li>
         </ul>
       </nav>
@@ -27,8 +52,19 @@
     </div>
     <nav class="nav__mobile container" aria-label="Mobile navigation">
       <a href="services.html">Services</a>
+      <a href="deep-cleaning.html" class="mobile-sub">Deep Cleaning</a>
+      <a href="recurring-cleaning.html" class="mobile-sub">Recurring Cleaning</a>
+      <a href="move-in-move-out-cleaning.html" class="mobile-sub">Move In / Move Out</a>
+      <a href="apartment-cleaning.html" class="mobile-sub">Apartment Cleaning</a>
+      <a href="areas/fairfield-county.html">Areas</a>
+      <a href="areas/danbury.html" class="mobile-sub">Danbury</a>
+      <a href="areas/ridgefield.html" class="mobile-sub">Ridgefield</a>
+      <a href="areas/newtown.html" class="mobile-sub">Newtown</a>
+      <a href="areas/bethel.html" class="mobile-sub">Bethel</a>
+      <a href="areas/brookfield.html" class="mobile-sub">Brookfield</a>
+      <a href="areas/wilton.html" class="mobile-sub">Wilton</a>
+      <a href="blog/">Blog</a>
       <a href="about.html">About</a>
-      <a href="index.html#areas">Service Areas</a>
       <a href="quote.html" class="btn btn-primary">Get a Free Quote</a>
     </nav>
   </header>
@@ -125,6 +161,107 @@
     </div>
   </section>
 
+  <!-- Testimonials -->
+  <section class="section testimonials" id="reviews">
+    <div class="container">
+      <div class="testimonials__meta">
+        <div>
+          <span class="section-label">What Clients Say</span>
+          <h2>Real Reviews from<br/>Real Neighbors</h2>
+        </div>
+        <div class="google-rating">
+          <div class="google-rating__logo">⭐</div>
+          <div>
+            <div class="google-rating__score">4.9 / 5</div>
+            <div class="google-rating__stars">★★★★★</div>
+            <div class="google-rating__label">Rated by local homeowners</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonials__grid">
+
+        <div class="testimonial-card testimonial-card--featured">
+          <div class="testimonial-card__stars">★★★★★</div>
+          <p class="testimonial-card__quote">"I've tried probably three other services over the years and Joy Cleaning is the first one I've actually stuck with. They show up when they say they will, they don't cut corners in the rooms they think I won't notice, and the house smells genuinely clean — not just sprayed with something. Maria is easy to reach and responsive. Highly recommend."</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar">KL</div>
+            <div>
+              <div class="testimonial-card__name">Karen L.</div>
+              <div class="testimonial-card__location">Ridgefield, CT · Recurring client, 2 years</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars">★★★★★</div>
+          <p class="testimonial-card__quote">"Used them for a move-out clean on a house I was selling in Danbury. The place looked better than it did when I bought it. The realtor actually commented on how clean it was during the walkthrough. Worth every penny."</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar">DM</div>
+            <div>
+              <div class="testimonial-card__name">David M.</div>
+              <div class="testimonial-card__location">Danbury, CT · Move-out clean</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars">★★★★★</div>
+          <p class="testimonial-card__quote">"We have two dogs and a toddler, so I was nervous about cleaning products. Carlos explained exactly what they use and why before the first visit. Everything is non-toxic and the clean was thorough. Our bathrooms have never looked this good."</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar">SP</div>
+            <div>
+              <div class="testimonial-card__name">Sarah P.</div>
+              <div class="testimonial-card__location">Newtown, CT · Bi-weekly client</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars">★★★★★</div>
+          <p class="testimonial-card__quote">"I hired them last minute before my in-laws visited and they fit me in within two days. The team was professional and did a deep clean that honestly embarrassed me — I didn't realize how much I'd been ignoring. Now I have a standing every-two-weeks booking."</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar">TR</div>
+            <div>
+              <div class="testimonial-card__name">Tom R.</div>
+              <div class="testimonial-card__location">Bethel, CT · Now bi-weekly client</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars">★★★★★</div>
+          <p class="testimonial-card__quote">"Our Redding property is large and we've had trouble finding a service willing to give it the time it needs. Joy Cleaning built a custom plan and they've stuck to it for over a year now. Reliable, detail-oriented, and they actually lock up properly when they leave."</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar">AM</div>
+            <div>
+              <div class="testimonial-card__name">Anne M.</div>
+              <div class="testimonial-card__location">Redding, CT · Monthly deep clean</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars">★★★★☆</div>
+          <p class="testimonial-card__quote">"Solid service, fair price, and they actually answered the phone the first time I called — which sounds basic but isn't with most companies. First deep clean took care of everything I'd been putting off. Will book again next season."</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar">JF</div>
+            <div>
+              <div class="testimonial-card__name">James F.</div>
+              <div class="testimonial-card__location">Ridgefield, CT · Deep clean</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="section-cta-nudge" style="margin-top:40px;">
+        <a href="quote.html" class="btn btn-primary">Get My Free Quote</a>
+        <span class="urgency-note"><span class="urgency-dot"></span> Most weeks book out 5–7 days in advance</span>
+      </div>
+    </div>
+  </section>
+
   <!-- How It Works -->
   <section class="section how" id="how">
     <div class="container">
@@ -209,12 +346,119 @@
     </div>
   </section>
 
+  <!-- Before / After -->
+  <section class="section" id="results">
+    <div class="container">
+      <span class="section-label">The Difference It Makes</span>
+      <h2>Before Joy Cleaning.<br/>After Joy Cleaning.</h2>
+      <p class="large mt-16" style="max-width:560px;">Results speak louder than descriptions. Here's what a professional clean actually changes in a real home — room by room.</p>
+
+      <div class="before-after__grid">
+
+        <!-- Kitchen -->
+        <div class="ba-card">
+          <div class="ba-card__panels">
+            <div class="ba-panel before">
+              <!-- Replace with real before image: <img class="ba-card__img-slot" src="images/kitchen-before.jpg" alt="Kitchen before cleaning"> -->
+              <div class="ba-panel__emoji">🍳</div>
+              <span class="ba-panel__tag">Before</span>
+            </div>
+            <div class="ba-panel after">
+              <!-- Replace with real after image: <img class="ba-card__img-slot" src="images/kitchen-after.jpg" alt="Kitchen after cleaning"> -->
+              <div class="ba-panel__emoji">✨</div>
+              <span class="ba-panel__tag">After</span>
+            </div>
+          </div>
+          <div class="ba-card__info">
+            <h3>Kitchen Deep Clean</h3>
+            <p>Grease on the stovetop, residue inside the oven, buildup under the fridge. After a deep clean: every surface sanitized, appliances scrubbed inside and out, floors mopped to the corners.</p>
+          </div>
+        </div>
+
+        <!-- Bathroom -->
+        <div class="ba-card">
+          <div class="ba-card__panels">
+            <div class="ba-panel before">
+              <!-- Replace with: <img class="ba-card__img-slot" src="images/bathroom-before.jpg" alt="Bathroom before cleaning"> -->
+              <div class="ba-panel__emoji">🚿</div>
+              <span class="ba-panel__tag">Before</span>
+            </div>
+            <div class="ba-panel after">
+              <!-- Replace with: <img class="ba-card__img-slot" src="images/bathroom-after.jpg" alt="Bathroom after cleaning"> -->
+              <div class="ba-panel__emoji">🪥</div>
+              <span class="ba-panel__tag">After</span>
+            </div>
+          </div>
+          <div class="ba-card__info">
+            <h3>Bathroom Scrub-Down</h3>
+            <p>Soap scum, grout discoloration, hard water stains on fixtures. After: grout scrubbed, glass polished streak-free, fixtures shining, and surfaces disinfected throughout.</p>
+          </div>
+        </div>
+
+        <!-- Living Area -->
+        <div class="ba-card">
+          <div class="ba-card__panels">
+            <div class="ba-panel before">
+              <!-- Replace with: <img class="ba-card__img-slot" src="images/living-before.jpg" alt="Living room before cleaning"> -->
+              <div class="ba-panel__emoji">🛋️</div>
+              <span class="ba-panel__tag">Before</span>
+            </div>
+            <div class="ba-panel after">
+              <!-- Replace with: <img class="ba-card__img-slot" src="images/living-after.jpg" alt="Living room after cleaning"> -->
+              <div class="ba-panel__emoji">🌿</div>
+              <span class="ba-panel__tag">After</span>
+            </div>
+          </div>
+          <div class="ba-card__info">
+            <h3>Living Room & Common Areas</h3>
+            <p>Dust on surfaces, pet hair on upholstery, fingerprints on windows. After: dusted top-to-bottom including ceiling fans and vents, floors vacuumed and mopped, windows and mirrors streak-free.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <p style="font-size:0.8rem;color:var(--muted);margin-top:20px;text-align:center;">Photos from real Joy Cleaning visits — coming soon. Results shown represent typical deep clean outcomes.</p>
+    </div>
+  </section>
+
+  <!-- Trust Badges -->
+  <div class="trust-badges" style="background:var(--off);">
+    <div class="container">
+      <div class="trust-badges__grid">
+        <div class="trust-badge">
+          <span class="trust-badge__icon">🏡</span>
+          <span class="trust-badge__text">Family-Owned &amp; Operated</span>
+        </div>
+        <div class="trust-badge">
+          <span class="trust-badge__icon">📅</span>
+          <span class="trust-badge__text">Serving Fairfield County Since 2018</span>
+        </div>
+        <div class="trust-badge">
+          <span class="trust-badge__icon">🔒</span>
+          <span class="trust-badge__text">Fully Insured Team</span>
+        </div>
+        <div class="trust-badge">
+          <span class="trust-badge__icon">✅</span>
+          <span class="trust-badge__text">24-Hour Re-Clean Guarantee</span>
+        </div>
+        <div class="trust-badge">
+          <span class="trust-badge__icon">🌿</span>
+          <span class="trust-badge__text">Non-Toxic, Eco-Friendly Products</span>
+        </div>
+        <div class="trust-badge">
+          <span class="trust-badge__icon">🚫</span>
+          <span class="trust-badge__text">No Contracts. Cancel Anytime.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Service Areas -->
   <section class="section areas" id="areas">
     <div class="container">
       <span class="section-label">Where We Work</span>
-      <h2>Five Towns. One Standard.</h2>
-      <p class="large mt-16">We serve five communities across Fairfield County — and in each one, you get the same team, the same thoroughness, and the same guarantee. Click your town to learn more.</p>
+      <h2>Eight Towns. One Standard.</h2>
+      <p class="large mt-16">We serve eight communities across Fairfield County — and in each one, you get the same team, the same thoroughness, and the same guarantee. Click your town to learn more.</p>
       <div class="areas__grid">
         <a href="areas/danbury.html" class="area-card">
           <div class="area-card__icon">📍</div>
@@ -225,7 +469,7 @@
         <a href="areas/ridgefield.html" class="area-card">
           <div class="area-card__icon">📍</div>
           <h3>Ridgefield</h3>
-          <p>Historic homes, antique finishes, and estates that demand careful, detail-oriented care. We bring it.</p>
+          <p>Historic homes, antique finishes, and estates that demand careful, detail-oriented care.</p>
           <div class="area-card__arrow">See Ridgefield →</div>
         </a>
         <a href="areas/newtown.html" class="area-card">
@@ -245,6 +489,24 @@
           <h3>Redding</h3>
           <p>Private properties, larger footprints, and a quieter pace. We match our service to the town.</p>
           <div class="area-card__arrow">See Redding →</div>
+        </a>
+        <a href="areas/brookfield.html" class="area-card">
+          <div class="area-card__icon">📍</div>
+          <h3>Brookfield</h3>
+          <p>Right next door to Danbury. Already on our weekly route — no travel surcharges, no delays.</p>
+          <div class="area-card__arrow">See Brookfield →</div>
+        </a>
+        <a href="areas/new-fairfield.html" class="area-card">
+          <div class="area-card__icon">📍</div>
+          <h3>New Fairfield</h3>
+          <p>Year-round homes and lakefront properties near Candlewood Lake. Seasonal cleans welcome.</p>
+          <div class="area-card__arrow">See New Fairfield →</div>
+        </a>
+        <a href="areas/wilton.html" class="area-card">
+          <div class="area-card__icon">📍</div>
+          <h3>Wilton</h3>
+          <p>Established homes and estates in southern Fairfield County. Premium care for premium homes.</p>
+          <div class="area-card__arrow">See Wilton →</div>
         </a>
       </div>
     </div>
@@ -278,30 +540,32 @@
           <h4>Services</h4>
           <ul>
             <li><a href="services.html">Standard Cleaning</a></li>
-            <li><a href="services.html">Deep Cleaning</a></li>
-            <li><a href="services.html">Move In / Out</a></li>
-            <li><a href="services.html">Post-Event</a></li>
-            <li><a href="services.html">Office Cleaning</a></li>
+            <li><a href="deep-cleaning.html">Deep Cleaning</a></li>
+            <li><a href="recurring-cleaning.html">Recurring Cleaning</a></li>
+            <li><a href="move-in-move-out-cleaning.html">Move In / Move Out</a></li>
+            <li><a href="apartment-cleaning.html">Apartment Cleaning</a></li>
           </ul>
         </div>
         <div class="footer__col">
           <h4>Service Areas</h4>
           <ul>
+            <li><a href="areas/fairfield-county.html">Fairfield County</a></li>
             <li><a href="areas/danbury.html">Danbury</a></li>
             <li><a href="areas/ridgefield.html">Ridgefield</a></li>
             <li><a href="areas/newtown.html">Newtown</a></li>
             <li><a href="areas/bethel.html">Bethel</a></li>
-            <li><a href="areas/redding.html">Redding</a></li>
+            <li><a href="areas/brookfield.html">Brookfield</a></li>
+            <li><a href="areas/wilton.html">Wilton</a></li>
           </ul>
         </div>
         <div class="footer__col">
-          <h4>Contact</h4>
+          <h4>Resources</h4>
           <ul>
-            <li><a href="tel:+12035550100">(203) 555-0100</a></li>
-            <li><a href="sms:+12035550100">Text Us</a></li>
-            <li><a href="mailto:hello@joycleaningllc.com">hello@joycleaningllc.com</a></li>
-            <li><a href="quote.html">Free Quote</a></li>
+            <li><a href="blog/">Blog</a></li>
             <li><a href="about.html">About Us</a></li>
+            <li><a href="quote.html">Free Quote</a></li>
+            <li><a href="tel:+12035550100">(203) 555-0100</a></li>
+            <li><a href="mailto:hello@joycleaningllc.com">hello@joycleaningllc.com</a></li>
           </ul>
         </div>
       </div>

@@ -17,24 +17,6 @@ if (hamburger && mobileNav) {
   });
 }
 
-// ── Quote Form Handler ──
-const quoteForm = document.getElementById('quoteForm');
-if (quoteForm) {
-  quoteForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const btn = quoteForm.querySelector('.form-submit');
-    btn.textContent = 'Request Sent!';
-    btn.style.background = '#22c55e';
-    btn.disabled = true;
-    setTimeout(() => {
-      btn.textContent = 'Get My Free Quote';
-      btn.style.background = '';
-      btn.disabled = false;
-      quoteForm.reset();
-    }, 3500);
-  });
-}
-
 // ── Scroll Animations ──
 const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -40px 0px' };
 const observer = new IntersectionObserver((entries) => {
@@ -47,7 +29,7 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, observerOptions);
 
-document.querySelectorAll('.service-card, .how__step, .why__feature, .area-card, .value-card, .team-card').forEach(el => {
+document.querySelectorAll('.service-card, .how__step, .why__feature, .area-card, .value-card, .team-card, .testimonial-card, .ba-card, .trust-badge').forEach(el => {
   el.style.opacity = '0';
   el.style.transform = 'translateY(20px)';
   el.style.transition = 'opacity .5s ease, transform .5s ease';

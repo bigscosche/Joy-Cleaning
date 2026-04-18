@@ -15,9 +15,34 @@
       <a href="index.html" class="nav__logo">Joy<span>Cleaning</span></a>
       <nav aria-label="Main navigation">
         <ul class="nav__links">
-          <li><a href="services.html">Services</a></li>
+          <li class="has-dropdown">
+            <a href="services.html">Services</a>
+            <div class="nav__dropdown">
+              <a href="services.html">All Services</a>
+              <hr>
+              <a href="deep-cleaning.html">Deep Cleaning</a>
+              <a href="recurring-cleaning.html">Recurring Cleaning</a>
+              <a href="move-in-move-out-cleaning.html">Move In / Move Out</a>
+              <a href="apartment-cleaning.html">Apartment Cleaning</a>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="areas/fairfield-county.html">Areas</a>
+            <div class="nav__dropdown">
+              <a href="areas/fairfield-county.html">Fairfield County</a>
+              <hr>
+              <a href="areas/danbury.html">Danbury</a>
+              <a href="areas/ridgefield.html">Ridgefield</a>
+              <a href="areas/newtown.html">Newtown</a>
+              <a href="areas/bethel.html">Bethel</a>
+              <a href="areas/redding.html">Redding</a>
+              <a href="areas/brookfield.html">Brookfield</a>
+              <a href="areas/new-fairfield.html">New Fairfield</a>
+              <a href="areas/wilton.html">Wilton</a>
+            </div>
+          </li>
+          <li><a href="blog/">Blog</a></li>
           <li><a href="about.html">About</a></li>
-          <li><a href="index.html#areas">Service Areas</a></li>
           <li><a href="quote.html" class="nav__cta">Get a Free Quote</a></li>
         </ul>
       </nav>
@@ -27,8 +52,19 @@
     </div>
     <nav class="nav__mobile container" aria-label="Mobile navigation">
       <a href="services.html">Services</a>
+      <a href="deep-cleaning.html" class="mobile-sub">Deep Cleaning</a>
+      <a href="recurring-cleaning.html" class="mobile-sub">Recurring Cleaning</a>
+      <a href="move-in-move-out-cleaning.html" class="mobile-sub">Move In / Move Out</a>
+      <a href="apartment-cleaning.html" class="mobile-sub">Apartment Cleaning</a>
+      <a href="areas/fairfield-county.html">Areas</a>
+      <a href="areas/danbury.html" class="mobile-sub">Danbury</a>
+      <a href="areas/ridgefield.html" class="mobile-sub">Ridgefield</a>
+      <a href="areas/newtown.html" class="mobile-sub">Newtown</a>
+      <a href="areas/bethel.html" class="mobile-sub">Bethel</a>
+      <a href="areas/brookfield.html" class="mobile-sub">Brookfield</a>
+      <a href="areas/wilton.html" class="mobile-sub">Wilton</a>
+      <a href="blog/">Blog</a>
       <a href="about.html">About</a>
-      <a href="index.html#areas">Service Areas</a>
       <a href="quote.html" class="btn btn-primary">Get a Free Quote</a>
     </nav>
   </header>
@@ -39,6 +75,10 @@
       <span class="section-label page-hero__tag">Free Quote — No Commitment</span>
       <h1>Tell Us About Your Home.<br/>We'll Handle the Rest.</h1>
       <p class="large mt-16">Most clients hear back from us the same day. We'll review your details, send a fair quote, and schedule a time that works around you — no pressure, no contracts.</p>
+      <div class="urgency-note" style="margin-top:16px;">
+        <span class="urgency-dot"></span>
+        Spots fill up fast — most weeks book out 5–7 days ahead
+      </div>
     </div>
   </section>
 
@@ -56,34 +96,37 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="firstName">First Name *</label>
-                <input type="text" id="firstName" name="firstName" required placeholder="Maria" />
+                <input type="text" id="firstName" name="firstName" autocomplete="given-name" placeholder="Maria" />
+                <span class="field-error">Please enter your first name.</span>
               </div>
               <div class="form-group">
                 <label for="lastName">Last Name *</label>
-                <input type="text" id="lastName" name="lastName" required placeholder="Johnson" />
+                <input type="text" id="lastName" name="lastName" autocomplete="family-name" placeholder="Johnson" />
+                <span class="field-error">Please enter your last name.</span>
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group">
                 <label for="phone">Phone Number *</label>
-                <input type="tel" id="phone" name="phone" required placeholder="(203) 555-0100" />
+                <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="(203) 555-0100" />
+                <span class="field-error">A phone number is required.</span>
               </div>
               <div class="form-group">
-                <label for="email">Email Address *</label>
-                <input type="email" id="email" name="email" required placeholder="maria@email.com" />
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" autocomplete="email" placeholder="maria@email.com" />
               </div>
             </div>
 
             <div class="form-group">
-              <label for="address">Home Address *</label>
-              <input type="text" id="address" name="address" required placeholder="123 Main St, Danbury, CT 06810" />
+              <label for="address">Home Address</label>
+              <input type="text" id="address" name="address" autocomplete="street-address" placeholder="123 Main St, Danbury, CT 06810" />
             </div>
 
             <div class="form-row">
               <div class="form-group">
                 <label for="serviceType">Service Type *</label>
-                <select id="serviceType" name="serviceType" required>
+                <select id="serviceType" name="serviceType">
                   <option value="" disabled selected>Select a service…</option>
                   <option value="standard">Standard Cleaning</option>
                   <option value="deep">Deep Cleaning</option>
@@ -93,6 +136,7 @@
                   <option value="eco">Eco-Friendly Cleaning</option>
                   <option value="unsure">Not Sure — Help Me Choose</option>
                 </select>
+                <span class="field-error">Please select a service type.</span>
               </div>
               <div class="form-group">
                 <label for="frequency">Frequency</label>
@@ -135,9 +179,26 @@
               <textarea id="notes" name="notes" placeholder="Pets in the home, areas of focus, scheduling preferences, special requests…"></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary form-submit">Send My Quote Request →</button>
-            <p class="form-note" style="color:var(--muted);">🔒 Your information is never sold or shared. We'll only contact you about your request.</p>
+            <p id="submitError" class="submit-error" style="display:none;">
+              Something went wrong. Please try again or call us at (203) 555-0100.
+            </p>
+
+            <button type="submit" id="submitBtn" class="btn btn-primary form-submit">Send My Quote Request →</button>
+            <div class="form-trust-bar">
+              <div class="form-trust-item"><span class="check">✓</span> No spam, ever</div>
+              <div class="form-trust-item"><span class="check">✓</span> No pressure or sales calls</div>
+              <div class="form-trust-item"><span class="check">✓</span> We respond same day</div>
+              <div class="form-trust-item"><span class="check">✓</span> Your info stays private</div>
+            </div>
           </form>
+
+          <!-- Success card — shown after submission -->
+          <div id="formSuccess" class="form-success">
+            <div class="form-success__icon">✅</div>
+            <h3 class="form-success__title">Thanks — we'll be in touch shortly.</h3>
+            <p class="form-success__text">Maria or Carlos will review your request and send your quote — usually within a few hours. Check your phone too; we often text first.</p>
+            <a href="index.html" class="btn btn-outline" style="margin-top:8px;">Back to Home</a>
+          </div>
         </div>
 
         <!-- Sidebar -->
@@ -172,6 +233,19 @@
     </div>
   </section>
 
+  <!-- Trust strip above footer -->
+  <div class="trust-badges" style="background:var(--off);border-top:1px solid var(--border);">
+    <div class="container">
+      <div class="trust-badges__grid">
+        <div class="trust-badge"><span class="trust-badge__icon">🏡</span><span class="trust-badge__text">Family-Owned &amp; Operated</span></div>
+        <div class="trust-badge"><span class="trust-badge__icon">🔒</span><span class="trust-badge__text">Fully Insured Team</span></div>
+        <div class="trust-badge"><span class="trust-badge__icon">✅</span><span class="trust-badge__text">24-Hour Re-Clean Guarantee</span></div>
+        <div class="trust-badge"><span class="trust-badge__icon">📅</span><span class="trust-badge__text">Est. 2018 · Danbury, CT</span></div>
+        <div class="trust-badge"><span class="trust-badge__icon">🚫</span><span class="trust-badge__text">No Contracts. Cancel Anytime.</span></div>
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
@@ -183,28 +257,32 @@
         <div class="footer__col">
           <h4>Services</h4>
           <ul>
-            <li><a href="services.html">Standard Cleaning</a></li>
-            <li><a href="services.html">Deep Cleaning</a></li>
-            <li><a href="services.html">Move In / Out</a></li>
-            <li><a href="services.html">Post-Event</a></li>
-            <li><a href="services.html">Office Cleaning</a></li>
+            <li><a href="deep-cleaning.html">Deep Cleaning</a></li>
+            <li><a href="recurring-cleaning.html">Recurring Cleaning</a></li>
+            <li><a href="move-in-move-out-cleaning.html">Move In / Out</a></li>
+            <li><a href="apartment-cleaning.html">Apartment Cleaning</a></li>
+            <li><a href="services.html">All Services</a></li>
           </ul>
         </div>
         <div class="footer__col">
           <h4>Service Areas</h4>
           <ul>
+            <li><a href="areas/fairfield-county.html">Fairfield County</a></li>
             <li><a href="areas/danbury.html">Danbury</a></li>
             <li><a href="areas/ridgefield.html">Ridgefield</a></li>
             <li><a href="areas/newtown.html">Newtown</a></li>
             <li><a href="areas/bethel.html">Bethel</a></li>
-            <li><a href="areas/redding.html">Redding</a></li>
+            <li><a href="areas/brookfield.html">Brookfield</a></li>
+            <li><a href="areas/wilton.html">Wilton</a></li>
           </ul>
         </div>
         <div class="footer__col">
-          <h4>Contact</h4>
+          <h4>Resources</h4>
           <ul>
+            <li><a href="blog/">Blog</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="quote.html">Free Quote</a></li>
             <li><a href="tel:+12035550100">(203) 555-0100</a></li>
-            <li><a href="sms:+12035550100">Text Us</a></li>
             <li><a href="mailto:hello@joycleaningllc.com">hello@joycleaningllc.com</a></li>
           </ul>
         </div>
@@ -223,5 +301,8 @@
   </div>
 
   <script src="js/main.js"></script>
+  <!-- Supabase client (UMD build — no bundler required) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/quote-form.js"></script>
 </body>
 </html>
