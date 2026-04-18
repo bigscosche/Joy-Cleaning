@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Cleaning Quote — Joy Cleaning LLC | Danbury CT</title>
+  <meta name="description" content="Get a free, no-obligation cleaning quote from Joy Cleaning LLC. Serving Danbury, Ridgefield, Newtown, Bethel, and Redding CT. We respond same day." />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- Nav -->
+  <header class="nav" role="banner">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo">Joy<span>Cleaning</span></a>
+      <nav aria-label="Main navigation">
+        <ul class="nav__links">
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="index.html#areas">Service Areas</a></li>
+          <li><a href="quote.html" class="nav__cta">Get a Free Quote</a></li>
+        </ul>
+      </nav>
+      <button class="nav__hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="nav__mobile container" aria-label="Mobile navigation">
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="index.html#areas">Service Areas</a>
+      <a href="quote.html" class="btn btn-primary">Get a Free Quote</a>
+    </nav>
+  </header>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="section-label page-hero__tag">Free Quote — No Commitment</span>
+      <h1>Tell Us About Your Home.<br/>We'll Handle the Rest.</h1>
+      <p class="large mt-16">Most clients hear back from us the same day. We'll review your details, send a fair quote, and schedule a time that works around you — no pressure, no contracts.</p>
+    </div>
+  </section>
+
+  <!-- Quote Form + Sidebar -->
+  <section class="section">
+    <div class="container">
+      <div class="quote-form-wrap">
+
+        <!-- Form -->
+        <div class="form-card">
+          <h3 style="margin-bottom:8px;">Your Free Quote Starts Here</h3>
+          <p style="margin-bottom:28px;font-size:0.875rem;">Fill out the fields below — takes about two minutes. Maria or Carlos will review your request personally and reply with a custom quote, usually within a few hours.</p>
+
+          <form id="quoteForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">First Name *</label>
+                <input type="text" id="firstName" name="firstName" required placeholder="Maria" />
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name *</label>
+                <input type="text" id="lastName" name="lastName" required placeholder="Johnson" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" required placeholder="(203) 555-0100" />
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required placeholder="maria@email.com" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="address">Home Address *</label>
+              <input type="text" id="address" name="address" required placeholder="123 Main St, Danbury, CT 06810" />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="serviceType">Service Type *</label>
+                <select id="serviceType" name="serviceType" required>
+                  <option value="" disabled selected>Select a service…</option>
+                  <option value="standard">Standard Cleaning</option>
+                  <option value="deep">Deep Cleaning</option>
+                  <option value="moveinout">Move In / Move Out</option>
+                  <option value="postevent">Post-Event Cleaning</option>
+                  <option value="office">Office Cleaning</option>
+                  <option value="eco">Eco-Friendly Cleaning</option>
+                  <option value="unsure">Not Sure — Help Me Choose</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="frequency">Frequency</label>
+                <select id="frequency" name="frequency">
+                  <option value="" disabled selected>How often?</option>
+                  <option value="once">One-Time</option>
+                  <option value="weekly">Weekly</option>
+                  <option value="biweekly">Every 2 Weeks</option>
+                  <option value="monthly">Monthly</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="bedrooms">Bedrooms</label>
+                <select id="bedrooms" name="bedrooms">
+                  <option value="" disabled selected>Number of bedrooms</option>
+                  <option value="1">1 Bedroom</option>
+                  <option value="2">2 Bedrooms</option>
+                  <option value="3">3 Bedrooms</option>
+                  <option value="4">4 Bedrooms</option>
+                  <option value="5+">5+ Bedrooms</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="bathrooms">Bathrooms</label>
+                <select id="bathrooms" name="bathrooms">
+                  <option value="" disabled selected>Number of bathrooms</option>
+                  <option value="1">1 Bathroom</option>
+                  <option value="2">2 Bathrooms</option>
+                  <option value="3">3 Bathrooms</option>
+                  <option value="4+">4+ Bathrooms</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="notes">Anything Else We Should Know?</label>
+              <textarea id="notes" name="notes" placeholder="Pets in the home, areas of focus, scheduling preferences, special requests…"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary form-submit">Send My Quote Request →</button>
+            <p class="form-note" style="color:var(--muted);">🔒 Your information is never sold or shared. We'll only contact you about your request.</p>
+          </form>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="quote-sidebar">
+          <div class="sidebar-card" style="background:var(--lavender);">
+            <h4>What Happens After You Submit</h4>
+            <p style="margin-top:8px;"><strong>1.</strong> Maria or Carlos reviews your request personally.</p>
+            <p style="margin-top:8px;"><strong>2.</strong> You receive a custom quote — usually within a few hours, often the same day.</p>
+            <p style="margin-top:8px;"><strong>3.</strong> You confirm a date. We show up. Your home gets cleaned.</p>
+            <p style="margin-top:12px;font-size:0.8rem;color:var(--muted);">No hard sell. No follow-up spam. Just a straightforward response from a real person.</p>
+          </div>
+
+          <div class="sidebar-card">
+            <h4>📞 Rather Talk First?</h4>
+            <p>We're happy to answer questions before you commit to anything. Call or text — you'll reach us directly.</p>
+            <a href="tel:+12035550100" class="btn btn-primary" style="display:flex;justify-content:center;margin-top:16px;">Call (203) 555-0100</a>
+            <a href="sms:+12035550100" class="btn btn-outline" style="display:flex;justify-content:center;margin-top:10px;">Send a Text</a>
+          </div>
+
+          <div class="sidebar-card">
+            <h4>✅ The 24-Hour Guarantee</h4>
+            <p>If anything isn't right after your clean, call us. We'll come back within 24 hours and fix it at no charge. No exceptions, no arguing about it.</p>
+          </div>
+
+          <div class="sidebar-card">
+            <h4>🗓️ We Work Around You</h4>
+            <p>Weekday mornings, Saturday afternoons, recurring every two weeks — we fill in around your schedule. You shouldn't have to rearrange your week for a cleaning.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="nav__logo">Joy<span>Cleaning</span></div>
+          <p>Family-run, premium house cleaning for Fairfield County's finest homes. Licensed, insured, and built on trust.</p>
+        </div>
+        <div class="footer__col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html">Standard Cleaning</a></li>
+            <li><a href="services.html">Deep Cleaning</a></li>
+            <li><a href="services.html">Move In / Out</a></li>
+            <li><a href="services.html">Post-Event</a></li>
+            <li><a href="services.html">Office Cleaning</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Service Areas</h4>
+          <ul>
+            <li><a href="areas/danbury.html">Danbury</a></li>
+            <li><a href="areas/ridgefield.html">Ridgefield</a></li>
+            <li><a href="areas/newtown.html">Newtown</a></li>
+            <li><a href="areas/bethel.html">Bethel</a></li>
+            <li><a href="areas/redding.html">Redding</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="tel:+12035550100">(203) 555-0100</a></li>
+            <li><a href="sms:+12035550100">Text Us</a></li>
+            <li><a href="mailto:hello@joycleaningllc.com">hello@joycleaningllc.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2025 Joy Cleaning LLC. All rights reserved.</span>
+        <span>Licensed · Insured · Bonded</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="sticky-cta" role="complementary" aria-label="Quick contact">
+    <a href="tel:+12035550100"><span class="icon">📞</span>Call</a>
+    <a href="sms:+12035550100"><span class="icon">💬</span>Text</a>
+    <a href="quote.html"><span class="icon">📋</span>Get Quote</a>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

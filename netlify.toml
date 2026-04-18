@@ -1,0 +1,34 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/danbury"
+  to = "/areas/danbury.html"
+  status = 301
+
+[[redirects]]
+  from = "/ridgefield"
+  to = "/areas/ridgefield.html"
+  status = 301
+
+[[redirects]]
+  from = "/newtown"
+  to = "/areas/newtown.html"
+  status = 301
+
+[[redirects]]
+  from = "/bethel"
+  to = "/areas/bethel.html"
+  status = 301
+
+[[redirects]]
+  from = "/redding"
+  to = "/areas/redding.html"
+  status = 301
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
